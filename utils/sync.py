@@ -14,11 +14,11 @@ EXTRACTOR_MAP = {
 }
 
 class SyncManager:
-    def __init__(self):
+    def __init__(self, connector=None, indexer=None):
+        self.connector = connector or DropboxConnector()
+        self.indexer = indexer or ElasticIndexer()
         os.makedirs(TEMP_DIR, exist_ok=True)
-        self.connector = DropboxConnector()
-        self.indexer = ElasticIndexer()
-
+        
     def sync(self):
         print("🔄 Syncing Dropbox with Elasticsearch...")
         self.indexer.create_index()
