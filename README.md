@@ -32,25 +32,14 @@ The application consists of several key components:
 
 ## Prerequisites
 
-* **Python:** Version 3.8+ recommended.
-* **Pip:** Python package installer (usually comes with Python).
-* **Git:** For cloning the repository.
 * **Elasticsearch:** A running instance (version 7.x or 8.x recommended). You can run it locally, via Docker, or use a cloud service.
     * [Elasticsearch Installation Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
-    * [Run Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 * **Dropbox Account:** A Dropbox account with files you want to index.
 * **Dropbox App:** You need to create a Dropbox App to obtain API credentials:
     1.  Go to the [Dropbox App Console](https://www.dropbox.com/developers/apps).
     2.  Choose "Dropbox API", "Full Dropbox" access (or "App Folder" if preferred, but adjust code accordingly).
     3.  Give your app a unique name.
     4.  Once created, go to the app's settings and generate an Access Token under the "OAuth 2" section. **Treat this token like a password!**
-* **(Optional) Tesseract OCR:** Required *only* if you enable `.png` or other image format extraction.
-    * [Tesseract Installation Guide](https://github.com/tesseract-ocr/tesseract/wiki#installation)
-    * Ensure the `tesseract` command is in your system's PATH.
-* **(Optional) Apache Tika:** Required *only* if using the Tika extractor (for broader file support and robust encoding detection).
-    * Requires Java Runtime Environment (JRE).
-    * [Apache Tika Setup](https://tika.apache.org/download.html) (Often used via the `tika-python` library which can start a Tika server).
-
 ---
 
 ## Installation & Setup
@@ -76,52 +65,34 @@ The application consists of several key components:
     ```bash
     pip install -r requirements.txt
     ```
-    *(Note: Ensure `requirements.txt` includes `fastapi`, `uvicorn`, `dropbox`, `elasticsearch`, `PyPDF2`, `python-dotenv`, and optional dependencies like `pytesseract`, `Pillow`, `tika-python` if used.)*
 
 4.  **Configure Environment Variables:**
-    * Create a file named `.env` in the project root directory.
-    * Copy the contents of `.env.example` (you should create this file) into `.env`.
-    * Edit the `.env` file with your actual credentials:
+    * Go to the config.py and set the configuration for the Elastic Search and Dropbox.
 
     ```dotenv
     # .env file
     DROPBOX_ACCESS_TOKEN="<your_dropbox_generated_access_token>"
     ELASTICSEARCH_HOST="http://localhost:9200" # Or your Elasticsearch host URL
     INDEX_NAME="dropbox_content_index"        # Or your desired index name
-    # Add other configurations like TEMP_DIR if needed
+    
     ```
-    *(Note: Add `.env` to your `.gitignore` file to avoid committing secrets!)*
+   
 
 5.  **Ensure Elasticsearch is Running:** Verify that your Elasticsearch instance is up and accessible at the `ELASTICSEARCH_HOST` specified in your `.env` file.
 
-6.  **(Optional) Install Tesseract/Tika:** Follow the instructions linked in Prerequisites if you need support for image or extended file formats.
+
 
 ---
 
 ## Running the Application
 
-There are two main parts: the synchronization process and the API server.
 
-1.  **Run the Synchronization Process:**
-    * This process connects to Dropbox, checks for new/deleted files, extracts content, and updates Elasticsearch.
-    * It's recommended to run this periodically (e.g., via cron or a scheduler) or manually when needed.
-    ```bash
-    # Example: Assuming you have a script src/run_sync.py
-    python src/run_sync.py
-    ```
-    * *(Note: You need to create this entry point script or detail how to trigger the `SyncManager().sync()` method)*
-    * The first sync might take a while depending on the number and size of files. Subsequent syncs should be faster if update detection is implemented.
-
-2.  **Start the API Server:**
+ **Start the API Server:**
     * This server handles incoming search requests.
     ```bash
     # Run from the project root directory where venv is activated
     uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8000
     ```
-    * `--reload`: Enables auto-reloading for development (remove for production).
-    * `--host 0.0.0.0`: Makes the server accessible on your network.
-    * `--port 8000`: Specifies the port number.
-    * The API server will be available at `http://localhost:8000` (or your machine's IP address).
 
 ---
 
