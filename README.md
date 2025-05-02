@@ -8,10 +8,10 @@ This application enables near real-time searching of content within a connected 
 
 ## Features
 
--Connects to Dropbox for file retrieval.
--Extracts text from .txt, .jpeg, .png, .csv, and .pdf files.
--Indexes extracted text and file metadata in Elasticsearch for near real-time searching.
--Supports keyword/phrase search in file content and metadata.
+- Connects to Dropbox for file retrieval.
+- Extracts text from .txt, .jpeg, .png, .csv, and .pdf files.
+- Indexes extracted text and file metadata in Elasticsearch for near real-time searching.
+- Supports keyword/phrase search in file content and metadata.
 
 ---
 
