@@ -2,29 +2,16 @@
 
 ## Project Description
 
-This application connects to a cloud storage service (currently Dropbox), downloads files, extracts their text content (including from PDFs, CSVs, and potentially images via OCR), indexes the content and metadata into Elasticsearch, and provides a simple API to search for files based on keywords within their content or name.
-
-This project was developed as part of a coding assessment.
-
-**Core Technologies:**
-
-* Python
-* FastAPI (for the search API)
-* Elasticsearch (for indexing and searching)
-* Dropbox API v2
-* PyPDF2, python-docx, python-pptx (and potentially Tesseract/Tika for extended format support)
+This application enables near real-time searching of content within a connected Dropbox account. It downloads files, extracts text (including from PDFs, CSVs, and optionally images via OCR), indexes this content and metadata in Elasticsearch, and provides a simple API to search by keywords in file content or names.
 
 ---
 
 ## Features
 
-* **Connects to Dropbox:** Fetches file metadata from a specified Dropbox account.
-* **Text Extraction:** Extracts text content from `.txt`, `.csv`, and `.pdf` files.
-    * *(Optional: Mention `.png`/OCR or other formats if Tesseract/Tika implemented)*
-* **Content Indexing:** Indexes extracted text and file metadata (filename, path, shared link) into Elasticsearch.
-* **Full-Text Search API:** Provides an HTTP API endpoint (`/search`) to find files containing a specific query term.
-* **Synchronization:** Includes a sync mechanism to add new files and remove deleted files from the search index.
-* **Modular Design:** Built with Object-Oriented Principles using separate modules for connectivity, extraction, indexing, and the API.
+-Connects to Dropbox for file retrieval.
+-Extracts text from .txt, .jpeg, .png, .csv, and .pdf files.
+-Indexes extracted text and file metadata in Elasticsearch for near real-time searching.
+-Supports keyword/phrase search in file content and metadata.
 
 ---
 
