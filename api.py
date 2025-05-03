@@ -19,11 +19,11 @@ def search(query: str = Query(..., description="Search query string")):
         results = indexer.search(query)
 
         if not results:
-            return {"results": [], "statusCode": 204}  # 204 No Content is better here
+            return {"results": [], "statusCode": 204} 
 
         if isinstance(results[0], dict):
             results = [r if isinstance(r, dict) else {"file_path": r} for r in results]
-        print(results[0])
+
 
         return {"results": results, "statusCode": 200}
 
