@@ -15,7 +15,7 @@ This application enables near real-time searching of content within a connected 
 
 ---
 
-## Architecture
+## High-Level Flow
 
 ![image](https://github.com/user-attachments/assets/e73b9c84-5616-47f8-a8c7-aa34113bc867)
 
