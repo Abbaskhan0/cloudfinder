@@ -69,7 +69,7 @@ The application consists of several key components:
     * Go to the config.py and set the configuration for the Elastic Search and Dropbox.
 
     ```dotenv
-    # .env file
+    # config.py file
     DROPBOX_ACCESS_TOKEN="<your_dropbox_generated_access_token>"
     ELASTICSEARCH_HOST="http://localhost:9200" # Or your Elasticsearch host URL
     INDEX_NAME="dropbox_content_index"        # Or your desired index name
@@ -140,5 +140,3 @@ Once the API server is running and an initial sync has been completed, you can s
 **File Deletion:** If you delete a file from Dropbox, it will be removed from the search results after the next successful run of the synchronization process.
 
 ---
-
-## Project Structure (Example)
