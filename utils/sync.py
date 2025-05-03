@@ -64,6 +64,9 @@ class SyncManager:
         for doc_id in indexed_ids - dropbox_ids:
             self.indexer.delete_document(doc_id)
             print(f"🗑️ Removed from index: {doc_id}")
+            
+       	print("refressing Index") 
+        self.indexer.refresh_index()
 
 # if __name__ == "__main__":
 #     sync = SyncManager()
