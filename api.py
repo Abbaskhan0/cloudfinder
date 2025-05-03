@@ -14,7 +14,7 @@ def search(query: str = Query(..., description="Search query string")):
     try:
         indexer = ElasticIndexer()
         sync_manager = SyncManager(indexer=indexer)
-        if sync_manager.sync()
+        if sync_manager.sync():
             indexer.refresh_index()
         results = indexer.search(query)
 
