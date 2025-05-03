@@ -17,16 +17,15 @@ This application enables near real-time searching of content within a connected 
 
 ## Architecture
 
-*(Placeholder: Insert a high-level design diagram image here or provide a link. The diagram should show the relationship between the User, API, Sync Process, Dropbox, Extractors, and Elasticsearch.)*
+![image](https://github.com/user-attachments/assets/e73b9c84-5616-47f8-a8c7-aa34113bc867)
 
 The application consists of several key components:
 
 1.  **Dropbox Connector (`src/connectors/dropbox_connector.py`):** Handles authentication and interaction with the Dropbox API (listing files, downloading files, getting shared links).
-2.  **File Extractors (`src/extraction/extractors.py`):** Responsible for extracting text content from different file formats (TXT, PDF, CSV, etc.). Uses a base class and specific implementations for each type.
+2.  **File Extractors (`src/extraction/extractors.py`):** Responsible for extracting text content from different file formats (TXT, PDF, CSV, Image.).
 3.  **Elasticsearch Indexer (`src/indexing/elasticsearch_connector.py`):** Manages the connection to Elasticsearch, index creation, and adding/deleting/searching documents.
 4.  **Sync Manager (`src/core/sync_manager.py`):** Orchestrates the synchronization process: fetching file lists from Dropbox and Elasticsearch, determining changes (new/deleted files *[Note: Update detection might require enhancement]*), triggering downloads, extractions, and indexing/deletion operations.
 5.  **API (`src/api/main.py`):** A FastAPI application that exposes the `/search` endpoint, takes a query parameter, interacts with the Elasticsearch Indexer, and returns matching file results (name and shared link).
-6.  **Configuration (`src/config.py`):** Manages application settings, primarily loading sensitive credentials and parameters from environment variables.
 
 ---
 
@@ -78,7 +77,7 @@ The application consists of several key components:
     ```
    
 
-5.  **Ensure Elasticsearch is Running:** Verify that your Elasticsearch instance is up and accessible at the `ELASTICSEARCH_HOST` specified in your `.env` file.
+5.  **Ensure Elasticsearch is Running:** Verify that your Elasticsearch instance is up and accessible at the `ELASTICSEARCH_HOST` specified in your `config.py` file.
 
 
 
