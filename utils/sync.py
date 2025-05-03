@@ -21,7 +21,7 @@ class SyncManager:
         
     def sync(self):
         print("🔄 Syncing Dropbox with Elasticsearch...")
-        self.indexer.create_index()
+        
         
         dropbox_files = self.connector.list_files()
         indexed_ids = self.indexer.list_indexed_ids()
@@ -30,8 +30,9 @@ class SyncManager:
 
         if dropbox_ids == indexed_ids:
             print("✅ Already in sync.")
-            return
-
+            return 0
+            
+        self.indexer.create_index()
         # Index new or updated files
         for file_id in dropbox_ids - indexed_ids:
             f = dropbox_file_map[file_id]
